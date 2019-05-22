@@ -2,7 +2,7 @@
 
 ## Requirements
 ```
-Docker>=18.09.*
+NVIDIA Docker>=2.0.*
 CUDA==10.1
 NVIDIA GPU such as GeForce series
 ```
