@@ -2,9 +2,11 @@
 
 ## Requirements
 ```
+NVIDIA GPU such as GeForce series
 NVIDIA Docker>=2.0.*
 CUDA==10.1
-NVIDIA GPU such as GeForce series
+
+direnv>=2.15.*
 ```
 
 ## Usage
@@ -14,9 +16,30 @@ NVIDIA GPU such as GeForce series
 docker pull chck/datascience-notebook-gpu:ubuntu18.04
 ```
 
+### Generate hashed password
+```shell
+make passwd
+
+>Enter password:
+>Verify password:
+>sha1:xxxxxxxxxxxxxxxxxxx
+```
+
+### Apply hashed password
+```
+direnv edit .
+=====
+export NOTEBOOK_PASSWD=sha1:xxxxxxxxxxxxxxxxxxx
+export LOCAL_NOTEBOOK_DIR=/path/to/dir/
+```
+
+```
+direnv allow .
+```
+
 ### Run container
 ```
-docker run --rm -it -p 8887:8888 chck/datascience-notebook-gpu:ubuntu18.04
+make run
 ```
 
 ### Access JupyterLab
