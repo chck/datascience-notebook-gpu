@@ -31,4 +31,6 @@ RUN sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g"
 WORKDIR /notebooks
 EXPOSE 8888
 
-CMD ["bash", "-lc", "jupyter lab --notebook-dir=/notebooks --no-browser --allow-root"]
+ENTRYPOINT ["bash", "-lc"]
+
+CMD ["jupyter lab --notebook-dir=/notebooks --no-browser --allow-root"]
