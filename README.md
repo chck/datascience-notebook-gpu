@@ -27,12 +27,12 @@ make passwd
 >sha1:xxxxxxxxxxxxxxxxxxx
 ```
 
-### Apply hashed password
+### Apply hashed password via direnv with dotenv
 ```
-direnv edit .
+vi .env
 =====
-export NOTEBOOK_PASSWD=sha1:xxxxxxxxxxxxxxxxxxx
-export LOCAL_NOTEBOOK_DIR=/path/to/dir/
+NOTEBOOK_PASSWD=sha1:xxxxxxxxxxxxxxxxxxx
+LOCAL_NOTEBOOK_DIR=/path/to/dir/
 ```
 
 ```
