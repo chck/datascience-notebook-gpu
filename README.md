@@ -1,5 +1,7 @@
 # datascience-notebook-gpu
 
+[![dockeri.co](https://dockeri.co/image/chck/datascience-notebook-gpu)](https://hub.docker.com/r/chck/datascience-notebook-gpu)
+
 ## Requirements
 ```
 NVIDIA GPU such as GeForce series
@@ -43,6 +45,6 @@ make run
 ```
 
 ### Access JupyterLab
-```
+``` 
 open http://(127.0.0.1 or CONTAINER_REMOTE_IP):8887
 ```
