@@ -7,7 +7,7 @@ all: help
 
 .PHONY: passwd  ## Generate hashed password
 passwd:
-	docker run --rm -it $(IMAGE) bash -c "python3 -c 'from notebook.auth import passwd;print(passwd())'"
+	docker run --rm -it $(IMAGE) "python3 -c 'from notebook.auth import passwd;print(passwd())'"
 
 .PHONY: build  ## Build image
 build:
