@@ -13,6 +13,9 @@ RUN apt-get update && \
         curl \
         file \
         wget \
+        libopenblas-dev \
+        gcc-8 \
+        g++-8 \
         locales \
         locales-all \
         graphviz \
@@ -23,11 +26,32 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# tsne-cuda
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.sh \
+    -q -O /tmp/cmake-install.sh && \
+    chmod u+x /tmp/cmake-install.sh && \
+    mkdir /usr/bin/cmake && \
+    /tmp/cmake-install.sh --skip-license --prefix=/usr/bin/cmake && \
+    rm /tmp/cmake-install.sh
+ENV PATH="/usr/bin/cmake/bin:${PATH}"
+RUN git clone https://github.com/CannyLab/tsne-cuda.git && \
+    cd tsne-cuda && \
+    git submodule sync && \
+    git submodule update -i && \
+    cd build && \
+    cmake .. && \
+    make
+RUN cd tsne-cuda/build/python && \
+    python3 setup.py install
+
+# pip dependencies
 RUN pip3 install wheel && \
     pip3 install jupyterlab
-RUN jupyter serverextension enable --py jupyterlab
-RUN jupyter notebook --generate-config
-RUN sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py
+RUN jupyter serverextension enable --py jupyterlab && \
+    jupyter notebook --generate-config && \
+    sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py
+
 WORKDIR /notebooks
 EXPOSE 8888
 
