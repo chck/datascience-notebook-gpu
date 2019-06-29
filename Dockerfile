@@ -46,8 +46,9 @@ RUN cd tsne-cuda/build/python && \
     python3 setup.py install
 
 # pip dependencies
-RUN pip3 install wheel && \
-    pip3 install jupyterlab
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install -U pip wheel && \
+    pip3 install -r /tmp/requirements.txt
 RUN jupyter serverextension enable --py jupyterlab && \
     jupyter notebook --generate-config && \
     sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py
