@@ -1,6 +1,7 @@
 NAME:=chck/datascience-notebook-gpu
 TAG:=ubuntu18.04
 IMAGE:=$(NAME):$(TAG)
+LATEST:=$(NAME):latest
 
 .PHONY: all
 all: help
@@ -11,7 +12,12 @@ passwd:
 
 .PHONY: build  ## Build image
 build:
-	docker build -t $(IMAGE) .
+	docker build -t $(IMAGE) -t $(LATEST) .
+
+.PHONY: push  ## Push image
+push:
+	docker push $(IMAGE)
+	docker push $(LATEST)
 
 .PHONY: run  ## Run JupyterLab
 run:
