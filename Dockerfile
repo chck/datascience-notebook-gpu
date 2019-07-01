@@ -47,7 +47,7 @@ RUN cd tsne-cuda/build/python && \
 
 # pip dependencies
 COPY requirements.txt /tmp/requirements.txt
-RUN pip3 install -U pip wheel && \
+RUN pip3 install -U wheel && \
     pip3 install -r /tmp/requirements.txt
 RUN jupyter serverextension enable --py jupyterlab && \
     jupyter notebook --generate-config && \
