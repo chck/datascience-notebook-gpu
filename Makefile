@@ -21,7 +21,7 @@ push:
 
 .PHONY: run  ## Run JupyterLab
 run:
-	docker run --runtime=nvidia --rm -it -p 8887:8888 -v $(LOCAL_NOTEBOOK_DIR):/notebooks $(IMAGE) "jupyter lab --notebook-dir=/notebooks --no-browser --allow-root --NotebookApp.password=$(NOTEBOOK_PASSWD)"
+	docker run --runtime=nvidia -d --rm -it -p 8887:8888 -v $(LOCAL_NOTEBOOK_DIR):/notebooks $(IMAGE) "jupyter lab --notebook-dir=/notebooks --no-browser --allow-root --NotebookApp.password=$(NOTEBOOK_PASSWD)"
 
 .PHONY: help ## View help
 help:
