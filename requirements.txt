@@ -1,7 +1,13 @@
 beautifulsoup4==4.7.*
+ipywidgets==7.4.*
 jupyterlab==1.0.*
 lxml==4.3.*
 matplotlib==3.0.*
 pandas==0.24.*
 pandas-gbq==0.10.*
+pillow==6.1.*
 scikit-learn==0.21.*
+sk-video==1.1.*
+tensorflow-gpu==1.14.*
+tqdm==4.32.*
+wordcloud==1.5.*

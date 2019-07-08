@@ -1,10 +1,10 @@
 FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends \
         build-essential \
         zlib1g-dev \
-        libssl-dev \
         libbz2-dev \
         libreadline-dev \
         libsqlite3-dev \
@@ -22,7 +22,12 @@ RUN apt-get update && \
         python3.7 \
         python3.7-dev \
         python3-pip \
-        python3-setuptools && \
+        python3-setuptools \
+        libssl1.0-dev \
+        nodejs-dev \
+        node-gyp \
+        npm \
+        ffmpeg && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -51,7 +56,8 @@ RUN pip3 install -U wheel && \
     pip3 install -r /tmp/requirements.txt
 RUN jupyter serverextension enable --py jupyterlab && \
     jupyter notebook --generate-config && \
-    sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py
+    sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 WORKDIR /notebooks
 EXPOSE 8888
