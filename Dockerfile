@@ -34,23 +34,6 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# gcloud-sdk
-ENV CLOUD_SDK_VERSION=253.0.0 \
-    PATH="/google-cloud-sdk/bin:${PATH}"
-RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
-    tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
-    rm google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
-    ln -s /lib /lib64
-RUN /bin/bash -lc 'gcloud config set core/disable_usage_reporting true && \
-    gcloud config set component_manager/disable_update_check true && \
-    gcloud config set metrics/environment github_docker_image'
-
-# mecab-ipadic-neologd
-RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git /tmp/neologd && \
-    mkdir -p /usr/lib/x86_64-linux-gnu/mecab/dic && \
-    /tmp/neologd/bin/install-mecab-ipadic-neologd -n -u -y && \
-    rm -rf /tmp/neologd
-
 # tsne-cuda
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-3.14.5-Linux-x86_64.sh \
@@ -69,6 +52,24 @@ RUN git clone https://github.com/CannyLab/tsne-cuda.git && \
     make
 RUN cd tsne-cuda/build/python && \
     python3 setup.py install
+
+# gcloud-sdk
+ENV CLOUD_SDK_VERSION=253.0.0 \
+    PATH="/google-cloud-sdk/bin:${PATH}"
+RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
+    tar xzf google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
+    rm google-cloud-sdk-${CLOUD_SDK_VERSION}-linux-x86_64.tar.gz && \
+    ln -s /lib /lib64
+RUN /bin/bash -lc 'gcloud config set core/disable_usage_reporting true && \
+    gcloud config set component_manager/disable_update_check true && \
+    gcloud config set metrics/environment github_docker_image'
+
+# mecab-ipadic-neologd
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git /tmp/neologd && \
+    mkdir -p /usr/lib/x86_64-linux-gnu/mecab/dic && \
+    /tmp/neologd/bin/install-mecab-ipadic-neologd -n -u -y && \
+    rm -rf /tmp/neologd
+ENV MECAB_DICDIR="/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd"
 
 # pip dependencies
 COPY requirements.txt /tmp/requirements.txt
