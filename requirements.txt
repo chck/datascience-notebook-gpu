@@ -10,6 +10,7 @@ pandas==0.24.*
 pandas-gbq==0.10.*
 pillow==6.1.*
 scikit-learn==0.21.*
+seaborn==0.9.*
 sentencepiece==0.1.*
 sk-video==1.1.*
 slackclient==1.3.*
