@@ -27,7 +27,10 @@ RUN apt-get update && \
         nodejs-dev \
         node-gyp \
         npm \
-        ffmpeg && \
+        ffmpeg \
+        libmecab-dev \
+        mecab \
+        mecab-ipadic-utf8 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -41,6 +44,12 @@ RUN curl -O https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 RUN /bin/bash -lc 'gcloud config set core/disable_usage_reporting true && \
     gcloud config set component_manager/disable_update_check true && \
     gcloud config set metrics/environment github_docker_image'
+
+# mecab-ipadic-neologd
+RUN git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git /tmp/neologd && \
+    mkdir -p /usr/lib/x86_64-linux-gnu/mecab/dic && \
+    /tmp/neologd/bin/install-mecab-ipadic-neologd -n -u -y && \
+    rm -rf /tmp/neologd
 
 # tsne-cuda
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 800 --slave /usr/bin/g++ g++ /usr/bin/g++-8
