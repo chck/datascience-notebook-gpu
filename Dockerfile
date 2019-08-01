@@ -78,7 +78,8 @@ RUN pip3 install -U wheel && \
 RUN jupyter serverextension enable --py jupyterlab && \
     jupyter notebook --generate-config && \
     sed -i -e "s/#c.NotebookApp.ip = 'localhost'/c.NotebookApp.ip = '0.0.0.0'/g" ~/.jupyter/jupyter_notebook_config.py && \
-    jupyter labextension install @jupyter-widgets/jupyterlab-manager
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
+    jupyter nbextension enable --py widgetsnbextension
 
 WORKDIR /notebooks
 EXPOSE 8888
