@@ -1,2 +1,5 @@
 # direnv, dotenv
 .env
+
+# nohup
+nohup.out

@@ -30,7 +30,8 @@ RUN apt-get update && \
         ffmpeg \
         libmecab-dev \
         mecab \
-        mecab-ipadic-utf8 && \
+        mecab-ipadic-utf8 \
+        graphviz && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
