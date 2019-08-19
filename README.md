@@ -11,6 +11,9 @@ CUDA==10.1
 direnv>=2.15.*
 ```
 
+## Included Python Packages
+https://github.com/chck/datascience-notebook-gpu/blob/master/requirements.txt
+
 ## Usage
 
 ### Pull image
