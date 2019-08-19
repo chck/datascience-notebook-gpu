@@ -21,6 +21,7 @@ RUN apt-get update && \
         graphviz \
         python3.7 \
         python3.7-dev \
+        libpython3-dev \
         python3-pip \
         python3-setuptools \
         libssl1.0-dev \
