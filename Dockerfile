@@ -32,7 +32,9 @@ RUN apt-get update && \
         libmecab-dev \
         mecab \
         mecab-ipadic-utf8 \
-        graphviz && \
+        graphviz \
+        xsel \
+        xclip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

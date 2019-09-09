@@ -13,6 +13,7 @@ pandas==0.24.*
 pandas-gbq==0.10.*
 pillow==6.1.*
 pydot==1.4.*
+pyperclip==1.7.*
 scikit-learn==0.21.*
 scikit-optimize==0.5.*
 seaborn==0.9.*
