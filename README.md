@@ -2,6 +2,8 @@
 
 [![dockeri.co](https://dockeri.co/image/chck/datascience-notebook-gpu)](https://hub.docker.com/r/chck/datascience-notebook-gpu)
 
+If you need to run on **CPU**, you can try [datascience-notebook-cpu](https://hub.docker.com/r/chck/datascience-notebook-cpu).
+
 ## Requirements
 ```
 NVIDIA GPU such as GeForce series
